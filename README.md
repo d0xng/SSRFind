@@ -1,6 +1,6 @@
 # SSRFind
 
-**Passive SSRF detection plugin for [Caido](https://caido.io)**
+**Passive SSRF detection plugin for [Caido](https://caido.io)** · [github.com/d0xng/SSRFind](https://github.com/d0xng/SSRFind)
 
 SSRFind monitors all HTTP traffic passing through Caido's proxy and automatically identifies potential Server-Side Request Forgery vulnerabilities. It uses a phased probing approach to minimize noise: a single OOB confirmation probe fires first, and deeper testing (port scanning, header injection, IP bypass encodings) is only triggered based on the results of the previous phase.
 
@@ -30,7 +30,7 @@ SSRFind monitors all HTTP traffic passing through Caido's proxy and automaticall
 
 ### Manual installation (from release ZIP)
 
-1. Download the latest `ssrfind.zip` from the [Releases](https://github.com/ssrfind/ssrfind/releases) page.
+1. Download the latest `ssrfind.zip` from the [Releases](https://github.com/d0xng/SSRFind/releases) page.
 2. In Caido, go to **Plugins → Manage plugins → Install from file**.
 3. Select the downloaded ZIP. Caido will install and activate the plugin immediately.
 
@@ -40,7 +40,7 @@ SSRFind monitors all HTTP traffic passing through Caido's proxy and automaticall
 # Prerequisites: Node.js 18+, pnpm
 npm install -g pnpm
 
-git clone https://github.com/ssrfind/ssrfind
+git clone https://github.com/d0xng/SSRFind
 cd ssrfind
 pnpm install
 pnpm build

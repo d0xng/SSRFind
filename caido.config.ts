@@ -17,7 +17,7 @@ export default defineConfig({
   author: {
     name: "SSRFind",
     email: "d0x@caido.io",
-    url: "https://github.com/ssrfind",
+    url: "https://github.com/d0xng/SSRFind",
   },
   plugins: [
     {
