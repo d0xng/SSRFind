@@ -7,20 +7,7 @@ import { useSettingsStore } from "../stores/settingsStore";
 const ssrfStore = useSSRFStore();
 const settingsStore = useSettingsStore();
 
-const isScanning = ref(false);
-const historyScanMsg = ref("");
 const guideOpen = ref(!settingsStore.isConfigured);
-
-async function onScanHistory(): Promise<void> {
-  isScanning.value = true;
-  historyScanMsg.value = "";
-  try {
-    const found = await ssrfStore.runHistoryScan();
-    historyScanMsg.value = `Found ${found} new candidate${found !== 1 ? "s" : ""} in history.`;
-  } finally {
-    isScanning.value = false;
-  }
-}
 </script>
 
 <template>
@@ -181,36 +168,23 @@ async function onScanHistory(): Promise<void> {
       />
     </div>
 
-    <!-- Scan History -->
-    <div class="bg-surface-800 border border-surface-700 rounded-lg p-5">
-      <div class="flex items-center justify-between mb-3">
+    <!-- Clear all data -->
+    <div class="bg-surface-800 border border-red-900/40 rounded-lg p-5">
+      <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-sm font-semibold text-surface-100">Scan HTTP History</h3>
+          <h3 class="text-sm font-semibold text-red-400">Clear all data</h3>
           <p class="text-surface-400 text-xs mt-0.5">
-            Analyze the last 200 requests from Caido's history for SSRF candidates
+            Removes all candidates, probes, findings and resets stats. This action cannot be undone.
           </p>
         </div>
         <button
-          :disabled="isScanning || !settingsStore.isConfigured"
-          class="flex items-center gap-2 px-4 py-2 rounded bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm transition-colors"
-          @click="onScanHistory"
+          class="flex items-center gap-2 px-4 py-2 rounded bg-rose-900 hover:bg-rose-800 text-rose-100 text-sm transition-colors"
+          @click="ssrfStore.clearAll()"
         >
-          <i :class="['fas', isScanning ? 'fa-spinner animate-spin' : 'fa-magnifying-glass']" />
-          {{ isScanning ? "Scanning..." : "Scan History" }}
+          <i class="fas fa-trash" />
+          Clear all data
         </button>
       </div>
-      <p v-if="historyScanMsg" class="text-green-400 text-sm">{{ historyScanMsg }}</p>
-    </div>
-
-    <!-- Clear data -->
-    <div class="flex justify-end">
-      <button
-        class="flex items-center gap-2 px-3 py-1.5 rounded text-xs text-surface-400 hover:text-red-400 hover:bg-red-500/10 transition-colors"
-        @click="ssrfStore.clearAll()"
-      >
-        <i class="fas fa-trash" />
-        Clear all data
-      </button>
     </div>
   </div>
 </template>
