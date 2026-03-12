@@ -1,0 +1,19 @@
+{
+  "name": "@ssrfind/frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "pinia": "^2.2.2",
+    "primevue": "4.1.0"
+  },
+  "devDependencies": {
+    "@caido/primevue": "latest",
+    "@caido/sdk-frontend": "latest",
+    "vue": "^3.5.0",
+    "vue-tsc": "^2.1.0",
+    "typescript": "5.5.4"
+  }
+}
