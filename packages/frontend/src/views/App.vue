@@ -50,6 +50,20 @@ onMounted(async () => {
   }
 });
 
+async function checkScope(): Promise<void> {
+  try {
+    const count = await sdk.backend.getScopeCount();
+    hasScope.value = count > 0;
+  } catch {
+    hasScope.value = false;
+  }
+}
+
+async function switchTab(tab: typeof activeTab.value): Promise<void> {
+  activeTab.value = tab;
+  if (tab !== "settings") await checkScope();
+}
+
 function goToSettings(): void {
   activeTab.value = "settings";
 }
@@ -77,7 +91,7 @@ function goToSettings(): void {
               ? 'text-surface-100'
               : 'text-surface-500 hover:text-surface-300',
           ]"
-          @click="activeTab = tab.id"
+          @click="switchTab(tab.id)"
         >
           <i :class="tab.icon" />
           {{ tab.label }}
