@@ -13,7 +13,7 @@ export default defineConfig({
   id,
   name: "SSRFind",
   description: "Passive SSRF detection with phased probing and OOB confirmation",
-  version: "0.1.0",
+  version: "0.1.1",
   author: {
     name: "SSRFind",
     email: "d0x@caido.io",
